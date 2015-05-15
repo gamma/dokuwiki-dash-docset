@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo ">LOADING PHPXRef"
+wget http://downloads.sourceforge.net/project/phpxref/phpxref/0.7.1/phpxref-0.7.1.tar.gz
+tar -xzf phpxref-0.7.1.tar.gz
+cp -a ./phpxref.cfg ./phpxref-0.7.1
+
+# checkout DokuWiki into current directory (no clone because dir isn't empty)
+# the branch is specified in the $DOKUWIKI environment variable
+echo ">CLONING DOKUWIKI: Master"
+mkdir -p dokuwiki
+git clone https://github.com/splitbrain/dokuwiki.git Master ./dokuwiki
+
+# Create Output Directory for PHPXref
+mkdir -p ./output

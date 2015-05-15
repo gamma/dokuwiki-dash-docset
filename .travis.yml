@@ -1,0 +1,9 @@
+language: php
+php:
+  - "5.4"
+install:
+  - "sh travis.sh"
+script:
+  - "perl ./phpxref-0.7.1/phpxref.pl"
+  - "php generate-dokuwiki.php"
+  - "ls -altr *"
