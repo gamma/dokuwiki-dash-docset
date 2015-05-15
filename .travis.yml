@@ -1,11 +1,19 @@
 language: php
 php:
-  - "5.4"
+- '5.4'
 install:
-  - "sh travis.sh"
+- sh travis.sh
 script:
-  - "cd phpxref-0.7.1"
-  - "perl ./phpxref.pl"
-  - "cd .."
-  - "php generate-dokuwiki.php"
-  - "ls -altr *"
+- cd phpxref-0.7.1
+- perl ./phpxref.pl
+- cd ..
+- php generate-dokuwiki.php
+- tar --exclude='.DS_Store' -cvzf dokuwiki-docset.tgz DokuWiki.docset
+- ls -altr *
+deploy:
+  provider: releases
+  api_key:
+    secure: 2VzyJwEQaMRx5VqCUzT8ahIiDi2ADUnroxochAxj+MDmmTGzUg/PYMhdTW55fw6I1mcFTk/LkhFFrHG8B2tbbvteJaXhvfufyOAHubgmwel8dY5chFNK8ZLU7qApOs+WdFj/QCLkOdlovoGp/ZaBO6HUFgDr+BL3NKbc+dAElA6ObIiitl7VTj3wvX9fvBUxU3S0tBRLFUR2twYSj32Fl4YHSCYeq8PRSBEpui1WTqPlJ93aGvDXmH4vjXqD++h2vuZHJRD8TprzpRbcMqIPS5Xm/Cs+J2bbmgh2WqFUVGjdZG/G89gguPxraYHP674wWWIQGBd2QqdoGKCiDjt6SOxPwJ0fJXHYyqJkOVzEBHDbjGQ0MmUIcxRdxKg0pvsVwnCnnyZoIt7OBC10n/GNq8+EaFD/9uG8qTcJAFivCgciMsErpicQbdQTXvSV4FGf94T6RcPkBmS2SoVNrsTRQgBGFLPzW1uEmajVSTs6fLPcZyxPa3RqJcQjkMWf8E7na1418zdQwU81dwDk9CaBmhlJGz5mKp8UgO0qkRVSTRqSmv/7fsk4BiM42c7NTDCfXkU8mcOVpFYeZzQrkaMFQmzC6P+PizbzUF7DRitVS5JbHf0MfXYrNGpdoxE+8kPsYVJZz6LwqrFMfMoH9xc+a/iolS2WinjUayaQCmBYLhk=
+  file: dokuwiki-docset.tgz
+  on:
+    repo: gamma/dokuwiki-dash-docset
