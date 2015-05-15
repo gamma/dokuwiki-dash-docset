@@ -4,6 +4,8 @@ php:
 install:
   - "sh travis.sh"
 script:
-  - "perl ./phpxref-0.7.1/phpxref.pl"
+  - "cd phpxref-0.7.1"
+  - "perl ./phpxref.pl"
+  - "cd .."
   - "php generate-dokuwiki.php"
   - "ls -altr *"
