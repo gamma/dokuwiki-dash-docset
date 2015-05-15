@@ -8,7 +8,7 @@ script:
 - perl ./phpxref.pl
 - cd ..
 - php generate-dokuwiki.php
-- tar --exclude='.DS_Store' -cvzf dokuwiki-docset.tgz DokuWiki.docset
+- tar --exclude='.DS_Store' -czf dokuwiki-docset.tgz DokuWiki.docset
 - ls -altr *
 deploy:
   provider: releases

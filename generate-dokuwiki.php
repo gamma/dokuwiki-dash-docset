@@ -58,7 +58,7 @@ function functionReference() {
         	$href = $location . '/' . $href;
         	if ( array_key_exists($href, $links)  ) { continue; }
         	
-        	print "Found '$type': '$name'\n";
+        	// print "Found '$type': '$name'\n";
         	$links[$href] = true;
     
         	$db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$name\",\"$type\",\"$href\")");
@@ -98,7 +98,7 @@ function events() {
             if ( !is_array($data) ) { continue; }
         
             $href = $data['file'];
-        	print "Found 'Event': '$event'\t=> '$href'\n";
+        	// print "Found 'Event': '$event'\t=> '$href'\n";
         	$db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$event\",\"Event\",\"$href\")");
     }
 }
