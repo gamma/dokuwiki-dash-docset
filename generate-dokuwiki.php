@@ -56,7 +56,7 @@ function functionReference() {
         	}
         	
         	$href = $location . '/' . $href;
-        	if ( $links[$href] ) { continue; }
+        	if ( array_key_exists($href, $links)  ) { continue; }
         	
         	print "Found '$type': '$name'\n";
         	$links[$href] = true;
@@ -85,7 +85,7 @@ function events() {
         $func = $matches[1];
         $evnt = $matches[2];
         
-        if ( !$events[$evnt] || array_search( $events[$evnt]['func'], $funcList ) > array_search( $func, $funcList ) ) {
+        if ( !array_key_exists($evnt, $events) || array_search( $events[$evnt]['func'], $funcList ) > array_search( $func, $funcList ) ) {
             $events[$evnt] = array(
                 'file' => $file,
                 'func' => $func
