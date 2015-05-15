@@ -4,12 +4,7 @@ php:
 install:
 - sh travis.sh
 script:
-- cd phpxref-0.7.1
-- perl ./phpxref.pl
-- cd ..
-- php generate-dokuwiki.php
-- tar --exclude='.DS_Store' -czf dokuwiki-docset.tgz DokuWiki.docset
-- ls -altr *
+- sh run.sh
 deploy:
   provider: releases
   api_key:

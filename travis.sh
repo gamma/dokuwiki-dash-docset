@@ -2,6 +2,7 @@
 #
 #    This script will download phpXref and the master Branch of DokuWiki
 #    from which it will create the documentation and the DocSet
+#    @author: Gerry Weißbach <https://github.com/gamma>
 
 echo ">LOADING PHPXRef"
 wget http://downloads.sourceforge.net/project/phpxref/phpxref/0.7.1/phpxref-0.7.1.tar.gz

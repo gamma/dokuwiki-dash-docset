@@ -22,6 +22,8 @@ function prepare() {
     	<string>dokuwiki</string>
     	<key>isDashDocset</key>
     	<true/>
+        <key>isJavaScriptEnabled</key>
+        <true/>
     	<key>dashIndexFilePath</key>
     	<string>index.html</string>
     </dict>
