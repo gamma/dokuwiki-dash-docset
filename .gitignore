@@ -5,3 +5,6 @@ desktop.ini
 .buildpath
 .project
 .settings
+output
+dokuwiki
+phpxref-0.7.1*
