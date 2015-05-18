@@ -12,4 +12,9 @@ php generate-dokuwiki.php
 
 # Package the Docset
 tar --exclude='.DS_Store' -czf dokuwiki-docset.tgz DokuWiki.docset
+
+# Clean Up
+rm -rf phpxref-0.7.1* output dokuwiki
+
+# Show everything
 ls -altr *
