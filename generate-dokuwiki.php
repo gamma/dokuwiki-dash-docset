@@ -22,13 +22,16 @@ function prepare() {
     	<string>dokuwiki</string>
     	<key>isDashDocset</key>
     	<true/>
-        <key>isJavaScriptEnabled</key>
-        <true/>
     	<key>dashIndexFilePath</key>
     	<string>index.html</string>
     </dict>
     </plist>
 ENDE
+
+//        <key>isJavaScriptEnabled</key>
+//        <true/>
+
+
     );
     copy(__DIR__ . "/icon.png", __DIR__ . "/DokuWiki.docset/icon.png");
     
@@ -39,12 +42,12 @@ ENDE
 
 function functionReference() {
     global $db;
-    $links = $edited = array();
     foreach( array( 'Class' => '_classes',
                     'Constant' => '_constants',
                     'Function' => '_functions',
                     'Variable' => '_variables' ) as $type => $location ) {
     
+        $links = array();
         $dom = new DomDocument;
         @$dom->loadHTMLFile(DOCUMENT_BASE . $location . "/index.html");
         
@@ -65,6 +68,8 @@ function functionReference() {
     
         	$db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$name\",\"$type\",\"$href\")");
         }
+        
+        print "\nFound " . count($links) . " of type: " . $type;
     }
 }
 
