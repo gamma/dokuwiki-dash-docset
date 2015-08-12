@@ -68,7 +68,7 @@ function functionReference() {
         	$links[$href] = true;
     
             $stmt->clear();
-            $stmt->bindValue(':name', $event, SQLITE3_TEXT);
+            $stmt->bindValue(':name', $name, SQLITE3_TEXT);
             $stmt->bindValue(':type', $type, SQLITE3_TEXT);
             $stmt->bindValue(':href', $href, SQLITE3_TEXT);
             $stmt->execute();
