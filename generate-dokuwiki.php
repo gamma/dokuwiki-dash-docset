@@ -52,6 +52,7 @@ function functionReference() {
         @$dom->loadHTMLFile(DOCUMENT_BASE . $location . "/index.html");
         
         // add links from the table of contents
+        $stmt = $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:name,:type,:href)');
         foreach ($dom->getElementsByTagName("a") as $a) {
         	$href = $a->getAttribute("href");
         	$name = $a->getAttribute("name");
@@ -66,9 +67,14 @@ function functionReference() {
         	// print "Found '$type': '$name'\n";
         	$links[$href] = true;
     
-        	$db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$name\",\"$type\",\"$href\")");
+            $stmt->clear();
+            $stmt->bindValue(':name', $event, SQLITE3_TEXT);
+            $stmt->bindValue(':type', $type, SQLITE3_TEXT);
+            $stmt->bindValue(':href', $href, SQLITE3_TEXT);
+            $stmt->execute();
         }
         
+        $stmt->close();
         print "\nFound " . count($links) . " of type: " . $type;
     }
 }
@@ -100,12 +106,17 @@ function events() {
         }
     }
 
-    $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:event,"Event",:href)');
+    $stmt = $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:name,"Event",:href)');
     foreach( $events as $event => $data ) {
         
             if ( !is_array($data) ) { continue; }
-        	$db->execute(array('event' => $event, 'href' => $data['file']));
+            $stmt->clear();
+            $stmt->bindValue(':name', $event, SQLITE3_TEXT);
+            $stmt->bindValue(':href', $data['file'], SQLITE3_TEXT);
+            $stmt->execute();
     }
+    
+    $stmt->close();
 }
 
 function files() {
@@ -114,13 +125,19 @@ function files() {
     $files = array();
     exec('find '.substr(DOCUMENT_BASE, 0, -1).' -type f -name "*.source.html"', $files);
 
-    $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:event,"File",:href)');
+    $stmt = $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:name,"File",:href)');
     foreach( $files as $href ) {
         $href = str_replace(DOCUMENT_BASE, '', $href);
         $file = str_replace('.source.html', '', $href);
         $matches = array();
-        	$db->execute(array('event' => $file, 'href' => $href));
+
+        $stmt->clear();
+        $stmt->bindValue(':name', $file, SQLITE3_TEXT);
+        $stmt->bindValue(':href', $href, SQLITE3_TEXT);
+        $stmt->execute();
     }
+
+    $stmt->close();
 }
 
 prepare();
