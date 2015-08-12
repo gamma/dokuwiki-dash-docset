@@ -100,13 +100,11 @@ function events() {
         }
     }
 
+    $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:event,"Event",:href)');
     foreach( $events as $event => $data ) {
         
             if ( !is_array($data) ) { continue; }
-        
-            $href = $data['file'];
-        	// print "Found 'Event': '$event'\t=> '$href'\n";
-        	$db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$event\",\"Event\",\"$href\")");
+        	$db->execute(array('event' => $event, 'href' => $data['file']));
     }
 }
 
@@ -115,11 +113,13 @@ function files() {
     
     $files = array();
     exec('find '.substr(DOCUMENT_BASE, 0, -1).' -type f -name "*.source.html"', $files);
+
+    $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:event,"File",:href)');
     foreach( $files as $href ) {
         $href = str_replace(DOCUMENT_BASE, '', $href);
         $file = str_replace('.source.html', '', $href);
         $matches = array();
-        $db->query("INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (\"$file\",\"File\",\"$href\")");
+        	$db->execute(array('event' => $file, 'href' => $href));
     }
 }
 
