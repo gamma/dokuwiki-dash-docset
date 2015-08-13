@@ -10,7 +10,7 @@ function prepare() {
     exec("mkdir -p DokuWiki.docset/Contents/Resources/");
     exec("cp -a " . __DIR__ . "/output " . DOCUMENT_BASE);
     
-    $command = 'echo $PATH; PATH=`echo $PATH | sed -e \'s/(:|^)\.\/[^:]*//\'`; find "' . DOCUMENT_BASE . '/" -name "*[A-Z]*" -execdir rename -fv "y/A-Z/a-z/" "{}" \;';
+    $command = 'PATH=`echo $PATH | sed -e \'s/:\.\/[^:]*//\'`; find "' . DOCUMENT_BASE . '/" -name "*[A-Z]*" -execdir rename -fv "y/A-Z/a-z/" "{}" \;';
     print "Renaming to lowercase with command:\n'$command'\n";
     exec($command);
     print "DONE. (Renaming to lowercase)";
