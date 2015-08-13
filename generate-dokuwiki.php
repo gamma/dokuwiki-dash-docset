@@ -9,7 +9,7 @@ function prepare() {
     exec("rm -rf DokuWiki.docset/Contents/Resources/");
     exec("mkdir -p DokuWiki.docset/Contents/Resources/");
     exec("cp -a " . __DIR__ . "/output " . DOCUMENT_BASE);
-    exec('cd "' . DOCUMENT_BASE . '/"; find . -name "*[A-Z]*" -exec rename -fv "y/A-Z/a-z/" "{}" \;');
+    exec('cd "' . DOCUMENT_BASE . '/"; ls -altr; find . -name "*[A-Z]*"; find . -name "*[A-Z]*" -exec rename -fv "y/A-Z/a-z/" "{}" \;');
     
     file_put_contents(__DIR__ . "/DokuWiki.docset/Contents/Info.plist", <<<ENDE
     <?xml version="1.0" encoding="UTF-8"?>
