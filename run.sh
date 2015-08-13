@@ -19,11 +19,12 @@ cp -a ./output "$DOCUMENT_BASE/Documents"
 export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//g'`
 
 echo "Renaming to lowercase"
+sh --version
 shopt -s globstar
 rename -fv "y/A-Z/a-z/" "$DOCUMENT_BASE/Documents/**"
 
-#find "$DOCUMENT_BASE/Documents/" -type f -name "*[A-Z]*" -execdir rename -fv "y/A-Z/a-z/" "{}" \; 2>&1 > /dev/null
-#find "$DOCUMENT_BASE/Documents/" -type d -name "*[A-Z]*" -execdir rename -fv "y/A-Z/a-z/" "{}" \; 2>&1 > /dev/null
+find "$DOCUMENT_BASE/Documents/" -type f -name "*[A-Z]*" -execdir rename -fv "y/A-Z/a-z/" "{}" \; 2>&1 > /dev/null
+find "$DOCUMENT_BASE/Documents/" -type d -name "*[A-Z]*" -execdir rename -fv "y/A-Z/a-z/" "{}" \; 2>&1 > /dev/null
 echo "DONE. (Renaming to lowercase)"
 
 # Generate the Docset
