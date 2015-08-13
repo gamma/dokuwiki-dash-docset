@@ -1,6 +1,6 @@
 <?php
 
-define('DOCUMENT_BASE', __DIR__ . "/DokuWiki.docset/Contents/Resources/Documents/");
+define('DOCUMENT_BASE', __DIR__ . "/DokuWiki.docset/Contents/Resources/Documents");
 global $db;
 
 function prepare() {
@@ -8,6 +8,7 @@ function prepare() {
     exec("rm -rf DokuWiki.docset/Contents/Resources/");
     exec("mkdir -p DokuWiki.docset/Contents/Resources/");
     exec("cp -a " . __DIR__ . "/output " . DOCUMENT_BASE);
+    exec("find " . DOCUMENT_BASE . " -name \"*[A-Z]*\" -exec rename -fv 'y/A-Z/a-z/' '{}' \;");
     
     file_put_contents(__DIR__ . "/DokuWiki.docset/Contents/Info.plist", <<<ENDE
     <?xml version="1.0" encoding="UTF-8"?>
@@ -61,7 +62,7 @@ function functionReference() {
             	continue;
         	}
         	
-        	$href = $location . '/' . $href;
+        	$href = $location . '/' . strtolower( $href );
         	if ( array_key_exists($href, $links)  ) { continue; }
         	
         	// print "Found '$type': '$name'\n";
@@ -100,7 +101,7 @@ function events() {
         
         if ( !array_key_exists($evnt, $events) || array_search( $events[$evnt]['func'], $funcList ) > array_search( $func, $funcList ) ) {
             $events[$evnt] = array(
-                'file' => $file,
+                'file' => strtolower( $file ),
                 'func' => $func
             );
         }
@@ -112,7 +113,7 @@ function events() {
             if ( !is_array($data) ) { continue; }
             $stmt->clear();
             $stmt->bindValue(':name', $event, SQLITE3_TEXT);
-            $stmt->bindValue(':href', $data['file'], SQLITE3_TEXT);
+            $stmt->bindValue(':href', strtolower( $data['file'] ), SQLITE3_TEXT);
             $stmt->execute();
     }
     
@@ -133,7 +134,7 @@ function files() {
 
         $stmt->clear();
         $stmt->bindValue(':name', $file, SQLITE3_TEXT);
-        $stmt->bindValue(':href', $href, SQLITE3_TEXT);
+        $stmt->bindValue(':href', strtolower( $href ), SQLITE3_TEXT);
         $stmt->execute();
     }
 
