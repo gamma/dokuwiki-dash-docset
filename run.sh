@@ -15,7 +15,7 @@ mkdir -p $DOCUMENT_BASE
 cp -a ./output "$DOCUMENT_BASE/Documents"
 
 echo $PATH
-export PATH=`echo $PATH | sed -e \'s/:\.\/[^:]*//\'`
+export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//'`
 echo $PATH
 
 echo "Renaming to lowercase with:"
