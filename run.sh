@@ -19,9 +19,9 @@ cp -a ./output "$DOCUMENT_BASE/Documents"
 export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//g'`
 
 echo "Renaming to lowercase:"
-find "$DOCUMENT_BASE/Documents/" -type f -execdir rename -fv "y/A-Z/a-z/" "{}" \;
-echo "Done with files. Now directories."
-find "$DOCUMENT_BASE/Documents/" -type d -exec rename -fv "y/A-Z/a-z/" "{}" \;
+cd "$DOCUMENT_BASE/Documents/"
+find . -depth -print0 | xargs -0 rename -fv '$_ = lc $_'
+cd -
 echo "DONE. (Renaming to lowercase)"
 
 # Generate the Docset
