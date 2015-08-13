@@ -3,6 +3,7 @@
 define('DOCUMENT_BASE', __DIR__ . "/DokuWiki.docset/Contents/Resources/Documents");
 global $db;
 
+
 function prepare() {
     global $db;
     exec("rm -rf DokuWiki.docset/Contents/Resources/");
