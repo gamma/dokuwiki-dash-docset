@@ -50,7 +50,7 @@ function functionReference() {
     
         $links = array();
         $dom = new DomDocument;
-        @$dom->loadHTMLFile(DOCUMENT_BASE . $location . "/index.html");
+        @$dom->loadHTMLFile(DOCUMENT_BASE . '/' . $location . "/index.html");
         
         // add links from the table of contents
         $stmt = $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:name,:type,:href)');
@@ -86,7 +86,7 @@ function events() {
     $events = array();
     $funcList = array( "Doku_Event", "register_hook", "trigger_event");
     $prefixes = implode('|', $funcList);
-    exec('grep -RE -e "('.$prefixes.')[^\'\"].*?\([\'\"]" --include "*.html" --exclude-dir "_test" ' . substr(DOCUMENT_BASE, 0, -1), $events);
+    exec('grep -RE -e "('.$prefixes.')[^\'\"].*?\([\'\"]" --include "*.html" --exclude-dir "_test" ' . DOCUMENT_BASE, $events);
     foreach( $events as $line ) {
         
         list($file, $command) = explode( ':', $line, 2);
@@ -124,7 +124,7 @@ function files() {
     global $db;
     
     $files = array();
-    exec('find '.substr(DOCUMENT_BASE, 0, -1).' -type f -name "*.source.html"', $files);
+    exec('find '.DOCUMENT_BASE.' -type f -name "*.source.html"', $files);
 
     $stmt = $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:name,"File",:href)');
     foreach( $files as $href ) {
