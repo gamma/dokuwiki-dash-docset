@@ -19,7 +19,7 @@ cp -a ./output "$DOCUMENT_BASE/Documents"
 export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//g'`
 
 echo "Renaming to lowercase:"
-find "$DOCUMENT_BASE/Documents/" -type d -execdir rename -fv "y/A-Z/a-z/" "{}*" \;
+find "$DOCUMENT_BASE/Documents/" -type d -execdir rename -fv "y/A-Z/a-z/" "{}/*" \;
 echo "Done with files. Now directories."
 find "$DOCUMENT_BASE/Documents/" -type d -execdir rename -fv "y/A-Z/a-z/" "{}" \;
 echo "DONE. (Renaming to lowercase)"
