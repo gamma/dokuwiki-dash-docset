@@ -7,6 +7,19 @@
 # Create PHPXref of DokuWiki
 cd phpxref-0.7.1 && perl ./phpxref.pl && cd ..
 
+# Prepare
+DOCUMENT_BASE="DokuWiki.docset/Contents/Resources"
+
+rm -rf $DOCUMENT_BASE
+mkdir -p $DOCUMENT_BASE
+cp -a ./output "$DOCUMENT_BASE/Documents"
+    
+export PATH=`echo $PATH | sed -e \'s/:\.\/[^:]*//\'`
+
+print "Renaming to lowercase with:";
+find "$DOCUMENT_BASE/Documents/" -name "*[A-Z]*" -execdir rename -fv "y/A-Z/a-z/" "{}" \;
+print "DONE. (Renaming to lowercase)";
+
 # Generate the Docset
 php generate-dokuwiki.php
 
