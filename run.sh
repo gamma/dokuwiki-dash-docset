@@ -20,7 +20,7 @@ export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//g'`
 
 echo "Renaming to lowercase:"
 cd "$DOCUMENT_BASE/Documents/"
-find . -depth -print0 | xargs -0 rename -fv '$_ = lc $_'
+find . -depth -print0 | xargs -0 rename -f '$_ = lc $_'
 cd -
 echo "DONE. (Renaming to lowercase)"
 
