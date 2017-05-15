@@ -18,9 +18,9 @@ cp -a ./output "$DOCUMENT_BASE/Documents"
 # Modify Path
 export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//g'`
 
-echo "Renaming to lowercase:"
-find "$DOCUMENT_BASE/Documents/" -depth -execdir rename -fv '$_ = lc $_' "{}" \;
-echo "DONE. (Renaming to lowercase)"
+#echo "Renaming to lowercase:"
+#find "$DOCUMENT_BASE/Documents/" -depth -execdir rename -fv '$_ = lc $_' "{}" \;
+#echo "DONE. (Renaming to lowercase)"
 
 # Generate the Docset
 php generate-dokuwiki.php

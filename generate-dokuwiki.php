@@ -59,7 +59,7 @@ function functionReference() {
             	continue;
         	}
         	
-        	$href = $location . '/' . strtolower( $href );
+        	$href = $location . '/' . $href;
         	if ( array_key_exists($href, $links)  ) { continue; }
         	
         	// print "Found '$type': '$name'\n";
@@ -98,7 +98,7 @@ function events() {
         
         if ( !array_key_exists($evnt, $events) || array_search( $events[$evnt]['func'], $funcList ) > array_search( $func, $funcList ) ) {
             $events[$evnt] = array(
-                'file' => strtolower( $file ),
+                'file' => $file,
                 'func' => $func
             );
         }
@@ -110,7 +110,7 @@ function events() {
             if ( !is_array($data) ) { continue; }
             $stmt->clear();
             $stmt->bindValue(':name', $event, SQLITE3_TEXT);
-            $stmt->bindValue(':href', strtolower( $data['file'] ), SQLITE3_TEXT);
+            $stmt->bindValue(':href', $data['file'], SQLITE3_TEXT);
             $stmt->execute();
     }
     
@@ -131,7 +131,7 @@ function files() {
 
         $stmt->clear();
         $stmt->bindValue(':name', $file, SQLITE3_TEXT);
-        $stmt->bindValue(':href', strtolower( $href ), SQLITE3_TEXT);
+        $stmt->bindValue(':href', $href, SQLITE3_TEXT);
         $stmt->execute();
     }
 
