@@ -38,6 +38,20 @@ ENDE
     $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
 }
 
+function existingFile( $type, $key, $href) {
+    global $existing;
+
+    if ( !is_array($existing[$type]) ) $existing[$type] = [];
+    if ( array_key_exists($key, $existing[$type]) ) return $existing[$type][$key];
+    if ( !file_exists(DOCUMENT_BASE."/".$href) ) {
+        print "Skipping: '$type':'$key' -> '$href'";
+        return null;
+    }
+    
+    $existing[$type][$key] = $href;
+    return $href;
+}
+
 function functionReference() {
     global $db;
     foreach( array( 'Class' => '_classes',
@@ -59,10 +73,11 @@ function functionReference() {
             	continue;
         	}
         	
-        	$href = $location . '/' . $href;
-        	if ( array_key_exists($href, $links)  ) { continue; }
+        	$href = existingFile($type, $name, $location . '/' . $href);
+        	if ( is_null( $href )  ) { continue; }
+        	// if ( array_key_exists($href, $links)  ) { continue; }
         	
-        	// print "Found '$type': '$name'\n";
+        	#print "Found '$type': '$name' - '$href'\n";
         	$links[$href] = true;
     
             $stmt->clear();
