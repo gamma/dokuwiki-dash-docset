@@ -41,6 +41,7 @@ ENDE
 function existingFile( $type, $key, $href) {
     global $existing;
 
+    if ( !is_array($existing) ) $existing = [];
     if ( !is_array($existing[$type]) ) $existing[$type] = [];
     if ( array_key_exists($key, $existing[$type]) ) return $existing[$type][$key];
     if ( !file_exists(DOCUMENT_BASE."/".$href) ) {
