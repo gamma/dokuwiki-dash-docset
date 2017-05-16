@@ -5,9 +5,12 @@ Generates a [Dash](http://kapeli.com/dash) docset for [DokuWiki](http://www.doku
 
 [![Travis Build State](https://travis-ci.org/gamma/dokuwiki-dash-docset.svg)](https://travis-ci.org/gamma/dokuwiki-dash-docset)
 
-##Build
+Build
+-----
 
 To build the Docset, just run the following scripts in that order:
 
     sh travis.sh
     sh run.sh
+
+Beware: This has to be done on either Travis or a system sporting a case sensitive file system.

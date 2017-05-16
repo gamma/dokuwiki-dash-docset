@@ -38,11 +38,13 @@ ENDE
     $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
 }
 
+global $existing;
 function existingFile( $type, $key, $href) {
     global $existing;
 
-    if ( !is_array($existing) ) $existing = [];
-    if ( !is_array($existing[$type]) ) $existing[$type] = [];
+    if ( !is_array($existing) ) $existing = array();
+    if ( !array_key_exists($type, $existing) ) $existing[$type] = array();
+
     if ( array_key_exists($key, $existing[$type]) ) return $existing[$type][$key];
     if ( !file_exists(DOCUMENT_BASE."/".$href) ) {
         print "Skipping: '$type':'$key' -> '$href'";
