@@ -5,9 +5,8 @@
 #    @author: Gerry Weißbach <https://github.com/gamma>
 
 echo "> LOADING PHPXRef"
-wget −O "phpxref.tgz" "https://github.com/gamma/phpxref/tarball/master"
-tar -xzf "phpxref.tgz"
-cp -a ./phpxref.cfg ./phpxref-0.7.1
+git clone --depth=1 https://github.com/gamma/phpxref.git ./phpxref
+cp -a ./phpxref.cfg ./phpxref
 
 # checkout DokuWiki into current directory (no clone because dir isn't empty)
 # the branch is specified in the $DOKUWIKI environment variable
