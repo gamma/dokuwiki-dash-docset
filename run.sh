@@ -4,7 +4,12 @@
 #    from which it will create the documentation and the DocSet
 #    @author: Gerry Weißbach <https://github.com/gamma>
 
-VERSION_NAME=$(cat ./dokuwiki/VERSION)
+BRANCH=git rev-parse --abbrev-ref HEAD
+if [ -e "./dokuwiki/VERSION" ]; then
+    BRANCH=$(cat ./dokuwiki/VERSION)
+fi
+
+VERSION_NAME=$BRANCH
 VERSION_PATH=$(echo "$VERSION_NAME" | tr -cd '[:alnum:]_-')
 
 DASH_CONTRIBUTIONS_PATH="../Dash-User-Contributions"
