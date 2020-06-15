@@ -10,9 +10,10 @@ cp -a ./phpxref.cfg ./phpxref
 
 # checkout DokuWiki into current directory (no clone because dir isn't empty)
 # the branch is specified in the $DOKUWIKI environment variable
-echo "> CLONING DOKUWIKI: Master"
-mkdir -p dokuwiki
-git clone --depth=1 https://github.com/splitbrain/dokuwiki.git ./dokuwiki
+echo "> CLONING DOKUWIKI: ${DOKUWIKI:-master}"
+mkdir -p dokuwiki && cd dokuwiki && git init
+git pull https://github.com/splitbrain/dokuwiki.git "${DOKUWIKI:-master}"
+cd -
 
 # Create Output Directory for PHPXref
 mkdir -p ./output

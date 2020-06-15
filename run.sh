@@ -4,8 +4,8 @@
 #    from which it will create the documentation and the DocSet
 #    @author: Gerry Weißbach <https://github.com/gamma>
 
-VERSION_NAME="4.0 (Greebo)"
-VERSION_PATH="4.0-greebo"
+VERSION_NAME=$(cat ./dokuwiki/VERSION)
+VERSION_PATH=$(echo "$VERSION_NAME" | tr -cd '[:alnum:]_-')
 
 DASH_CONTRIBUTIONS_PATH="../Dash-User-Contributions"
 DASH_DW_CONTRIBUTIONS_PATH="${DASH_CONTRIBUTIONS_PATH}/docsets/DokuWiki"
