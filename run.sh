@@ -4,13 +4,21 @@
 #    from which it will create the documentation and the DocSet
 #    @author: Gerry Weißbach <https://github.com/gamma>
 
+if [ -z "$DOKUWIKI" ]; then
+    DOKUWIKI=$(cat ./.travis.yml | grep "DOKUWIKI=" | awk -F= '{print $2}')
+fi
+
 BRANCH=git rev-parse --abbrev-ref HEAD
 if [ -e "./dokuwiki/VERSION" ]; then
     BRANCH=$(cat ./dokuwiki/VERSION)
 fi
 
-VERSION_NAME=$BRANCH
-VERSION_PATH=$(echo "$VERSION_NAME" | tr -cd '[:alnum:]_-')
+if [ -z "BRANCH" ]; then
+    BRANCH=$DOKUWIKI
+fi
+
+VERSION_NAME=$(echo "Dokuwiki $BRANCH" | xargs)
+VERSION_PATH=$(echo "$BRANCH" | tr -cd '[:alnum:]_-')
 
 DASH_CONTRIBUTIONS_PATH="../Dash-User-Contributions"
 DASH_DW_CONTRIBUTIONS_PATH="${DASH_CONTRIBUTIONS_PATH}/docsets/DokuWiki"
@@ -19,7 +27,7 @@ DASH_DW_CONTRIBUTIONS_PATH="${DASH_CONTRIBUTIONS_PATH}/docsets/DokuWiki"
 cd ./phpxref/ && perl ./phpxref.pl && cd ..
 
 # Prepare
-DOCUMENT_BASE="DokuWiki.docset/Contents/Resources"
+DOCUMENT_BASE="${VERSION_NAME}.docset/Contents/Resources"
 
 # Delete create
 rm -rf "$DOCUMENT_BASE"
@@ -33,7 +41,7 @@ export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//g'`
 php generate-dokuwiki.php
 
 # Package the Docset
-tar --exclude='.DS_Store' -czf dokuwiki-docset.tgz DokuWiki.docset
+tar --exclude='.DS_Store' -czf dokuwiki-docset.tgz "${VERSION_NAME}.docset"
 
 if [ -d "${DASH_CONTRIBUTIONS_PATH}" ]; then
     echo "Will copy docset file to Dash-User-Contributions"
