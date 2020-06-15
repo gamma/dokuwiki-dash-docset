@@ -4,8 +4,8 @@
 #    from which it will create the documentation and the DocSet
 #    @author: Gerry Weißbach <https://github.com/gamma>
 
-VERSION_NAME="3.0 (Frusterick Manners)"
-VERSION_PATH="3.0-frusterick-manners"
+VERSION_NAME="4.0 (Greebo)"
+VERSION_PATH="4.0-greebo"
 
 DASH_CONTRIBUTIONS_PATH="../Dash-User-Contributions"
 DASH_DW_CONTRIBUTIONS_PATH="${DASH_CONTRIBUTIONS_PATH}/docsets/DokuWiki"
