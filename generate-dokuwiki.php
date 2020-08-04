@@ -1,8 +1,10 @@
 <?php
 
-$DOKU_WIKI="DokuWiki";
-if ( $argc > 0 ) {
-    $DOKU_WIKI = $argv[0];
+global $DOKU_WIKI;
+if ( $argc > 1 ) {
+    $DOKU_WIKI = $argv[1];
+} else {
+    $DOKU_WIKI = "DokuWiki";
 }
 
 define('DOCUMENT_BASE', __DIR__ . "/${DOKU_WIKI}.docset/Contents/Resources/Documents");
@@ -11,6 +13,7 @@ global $db;
 
 function prepare() {
     global $db;
+    global $DOKU_WIKI;
     
     file_put_contents(__DIR__ . "/${DOKU_WIKI}.docset/Contents/Info.plist", <<<ENDE
     <?xml version="1.0" encoding="UTF-8"?>
