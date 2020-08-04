@@ -109,7 +109,7 @@ function events() {
     $events = array();
     $funcList = array( "Doku_Event", "register_hook", "trigger_event");
     $prefixes = implode('|', $funcList);
-    exec('grep -RE -e "('.$prefixes.')[^\'\"].*?\([\'\"]" --include "*.html" --exclude-dir "_test" ' . DOCUMENT_BASE, $events);
+    exec('grep -RE -e "('.$prefixes.')[^\'\"].*?\([\'\"]" --include "*.html" --exclude-dir "_test" "' . DOCUMENT_BASE . '"', $events);
     foreach( $events as $line ) {
         
         list($file, $command) = explode( ':', $line, 2);
