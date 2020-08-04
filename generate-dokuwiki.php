@@ -8,6 +8,7 @@ if ( $argc > 1 ) {
 }
 
 define('DOCUMENT_BASE', __DIR__ . "/${DOKU_WIKI}.docset/Contents/Resources/Documents");
+print "DOCUMENT_BASE: " . DOCUMENT_BASE;
 global $db;
 
 

@@ -56,4 +56,7 @@ rm -rf "./phpxref/" output dokuwiki
 
 # Show everything
 ls -altr *
+ls -altr */*
+ls -altr */*/*
+
 du -sh *
