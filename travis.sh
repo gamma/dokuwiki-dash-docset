@@ -13,6 +13,11 @@ cp -a ./phpxref.cfg ./phpxref
 echo "> CLONING DOKUWIKI: ${DOKUWIKI:-master}"
 mkdir -p dokuwiki && cd dokuwiki && git init
 git pull https://github.com/splitbrain/dokuwiki.git "${DOKUWIKI:-master}"
+
+# remove not needed language files
+echo "> Removing not needed language files"
+find . -name "lang" -type d -exec find {} -type d -not -name "en" -depth 1 \; | xargs rm -rf
+
 cd -
 
 # Create Output Directory for PHPXref
