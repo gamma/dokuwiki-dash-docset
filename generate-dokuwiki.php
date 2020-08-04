@@ -1,13 +1,18 @@
 <?php
 
-define('DOCUMENT_BASE', __DIR__ . "/DokuWiki.docset/Contents/Resources/Documents");
+$DOKU_WIKI="DokuWiki";
+if ( $argc > 0 ) {
+    $DOKU_WIKI = $argv[0];
+}
+
+define('DOCUMENT_BASE', __DIR__ . "/${DOKU_WIKI}.docset/Contents/Resources/Documents");
 global $db;
 
 
 function prepare() {
     global $db;
     
-    file_put_contents(__DIR__ . "/DokuWiki.docset/Contents/Info.plist", <<<ENDE
+    file_put_contents(__DIR__ . "/${DOKU_WIKI}.docset/Contents/Info.plist", <<<ENDE
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
@@ -31,9 +36,9 @@ ENDE
 
 
     );
-    copy(__DIR__ . "/icon.png", __DIR__ . "/DokuWiki.docset/icon.png");
+    copy(__DIR__ . "/icon.png", __DIR__ . "/${DOKU_WIKI}.docset/icon.png");
     
-    $db = new sqlite3(__DIR__ . "/DokuWiki.docset/Contents/Resources/docSet.dsidx");
+    $db = new sqlite3(__DIR__ . "/${DOKU_WIKI}.docset/Contents/Resources/docSet.dsidx");
     $db->query("CREATE TABLE searchIndex(id INTEGER PRIMARY KEY, name TEXT, type TEXT, path TEXT)");
     $db->query("CREATE UNIQUE INDEX anchor ON searchIndex (name, type, path)");
 }

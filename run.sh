@@ -38,7 +38,7 @@ cp -a ./output "$DOCUMENT_BASE/Documents"
 export PATH=`echo $PATH | sed -e 's/:\.\/[^:]*//g'`
 
 # Generate the Docset
-php generate-dokuwiki.php
+php generate-dokuwiki.php "${VERSION_NAME}"
 
 # Package the Docset
 tar --exclude='.DS_Store' -czf dokuwiki-docset.tgz "${VERSION_NAME}.docset"
