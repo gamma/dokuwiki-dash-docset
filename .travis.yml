@@ -10,7 +10,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: $RELEASE_KEY
+    secure: vem1L+e5n3xngCO7YLF8kyp8xplLqUzbgxP8lQGqdmFjZFlY5iqIogLxZWtxWX7n1ALXskzDT3WOcYmVc1tfdf0di+7SwKDAo1S02mFxkaT7+9GPVf8Zk1E2Xjb1S50JuL2NoklW51kOvmU7Uqx/RqJEwVJxrP1WWsszjg3KkK+6o2oYWai14Ee2s7qXPfKlKuf+/bqU9aXGaA4UntNt5+FCOwdYS+e+166i3j11bnySPIhSWRrW3cFQKJxKljNTviAz+DlTWYP+S51+c7bi7jeIoChIQdxYgdfkdjHtFKQ+eG6LAYv73Oob1DkjF1THSGRJ5c87xtLuBHQclYIu+mnAsgk1yr18Nv26kW1wE5rLhu719guIvm2O75kbS3A8uz+88e9Y2BOi8eGS8K7p3DNgnqVQ2K6XByxRh0qH2qA1deqOVSBSWOFszdEU79S/yLihNEYaFq3QBdcTNpDvqA2d1y4HT/a8UQ6OyTDefxNaaa6Hn4dqSNShtnVku5rYgHtb70y+wVqyiaZl09v4P++/6yHiMrv8AolL7q86hguZjt0Sk5Q+R9KfYXPjBpSHT6OjjR4QdC3MlFH3tCs2xEwLYaIzx/svmknmM/KJnXFW+fGhhJWQWPZ5uoq4ApWpvOLD2/ke9mEEVHwSiNQZUkmIsausgvH71MichtDIe8I=
   file: dokuwiki-docset.tgz
   on:
     repo: gamma/dokuwiki-dash-docset
