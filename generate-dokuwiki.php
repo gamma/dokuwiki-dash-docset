@@ -147,7 +147,9 @@ function files() {
     global $db;
     
     $files = array();
-    exec('find '.DOCUMENT_BASE.' -type f -name "*.source.html"', $files);
+
+    print "\n\n";
+    exec('find "'.DOCUMENT_BASE.'" -type f -name "*.source.html"', $files);
 
     $stmt = $db->prepare('INSERT OR IGNORE INTO searchIndex(name, type, path) VALUES (:name,"File",:href)');
     foreach( $files as $href ) {
@@ -162,6 +164,7 @@ function files() {
     }
 
     $stmt->close();
+    print "\n\n";
 }
 
 prepare();
