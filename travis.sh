@@ -16,7 +16,7 @@ git pull https://github.com/splitbrain/dokuwiki.git "${DOKUWIKI:-master}"
 
 # remove not needed language files
 echo "> Removing not needed language files"
-find . -name "lang" -type d -exec find {}  -depth 1 -type d -not -name "en" \; | xargs rm -rf
+find . -name "lang" -type d -exec find {} -type d -depth 1 -not -name "en" \; | xargs rm -rf
 cd -
 
 # Create Output Directory for PHPXref
